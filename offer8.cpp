@@ -19,6 +19,13 @@ using namespace std;
 //}
 
 //时间复杂度：O(logN)---类似于二分查找
+int minNumberInRotateArray(vector<int> rotateArray, int left, int right)
+{
+	int min_v = rotateArray[left];
+	for (int i=left; i<=right; i++)
+		min_v = min(rotateArray[i],min_v);
+	return min_v;
+}
 int minNumberInRotateArray(vector<int> rotateArray)
 {
 	if (rotateArray.empty())
@@ -36,7 +43,7 @@ int minNumberInRotateArray(vector<int> rotateArray)
 		mid = left+((right-left)>>1);
 
 		if (rotateArray[mid]==rotateArray[left] && rotateArray[right]==rotateArray[mid])
-			return rotateArray[mid];
+			return minNumberInRotateArray(rotateArray,left,right);
 
 		if (rotateArray[mid] >= rotateArray[left])
 			left = mid;
